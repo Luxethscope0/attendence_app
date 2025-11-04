@@ -25,8 +25,8 @@ def get_db_connection():
         )
         return conn
     except psycopg2.OperationalError as e:
-        st.error(f"Error: Could not connect to PostgreSQL database. Details: {e}")
-        st.stop()
+        print(f"FATAL: Could not connect to PostgreSQL database. Details: {e}")
+        exit()
 
 def hash_existing_passwords():
     conn = get_db_connection() # Use new connection function

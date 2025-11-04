@@ -32,8 +32,8 @@ def get_db_connection():
         )
         return conn
     except psycopg2.OperationalError as e:
-        st.error(f"Error: Could not connect to PostgreSQL database. Details: {e}")
-        st.stop()
+        print(f"FATAL: Could not connect to PostgreSQL database. Is it running? Details: {e}")
+        exit()
 
 def setup_database():
     # --- 1. Connect and clear old tables ---
