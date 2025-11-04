@@ -9,7 +9,7 @@ import os
 #
 # IMPORTANT: Use a "App Password" if you have 2-Factor Auth (see notes below)
 #
-SENDER_EMAIL = "bharatraj.16k@gmail.com"
+SENDER_EMAIL = "123@gmail.com"
 SENDER_PASSWORD = os.environ.get("MY_APP_SENDER_PASSWORD")
 
 if not SENDER_PASSWORD:
