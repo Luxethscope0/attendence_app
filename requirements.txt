@@ -1,0 +1,8 @@
+streamlit
+streamlit-authenticator
+psycopg2-binary
+pandas
+plotly
+qrcode
+streamlit-qrcode-scanner
+numpy   
