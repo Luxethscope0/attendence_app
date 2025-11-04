@@ -9,18 +9,22 @@ import numpy as np
 # --- Re-use the connection function from database.py ---
 # This is a bit of code duplication, but keeps this script standalone
 def get_db_connection():
-
+    """
+    Connects to the PostgreSQL database using environment variables
+    for standalone scripts.
+    """
     DB_HOST = os.environ.get("DB_HOST")
-    DB_PORT = os.environ.get("DB_PORT", "5432") # Default to 5432 if not set
+    DB_PORT = os.environ.get("DB_PORT", "5432")
     DB_NAME = os.environ.get("DB_NAME")
     DB_USER = os.environ.get("DB_USER")
     DB_PASS = os.environ.get("DB_PASS")
 
-    # Check if all variables are set
+    # This part is changed to use print() and exit()
     if not all([DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS]):
-        # This error will only show up in the Streamlit app if secrets are missing
-        st.error("Database is not configured. Please set all DB_* environment variables/secrets.")
-        st.stop()
+        print("FATAL ERROR: Database is not configured.")
+        print("Please set all 5 environment variables (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS).")
+        print("If using PowerShell, use: $env:DB_HOST = \"your_host\"")
+        exit()
 
     try:
         conn = psycopg2.connect(
@@ -32,7 +36,8 @@ def get_db_connection():
         )
         return conn
     except psycopg2.OperationalError as e:
-        print(f"FATAL: Could not connect to PostgreSQL database. Is it running? Details: {e}")
+        # This part is also changed
+        print(f"FATAL ERROR: Could not connect to PostgreSQL database. Details: {e}")
         exit()
 
 def setup_database():
